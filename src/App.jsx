@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
 import ProductList from './components/ProductList';
+import { Container, Typography, Box } from '@mui/material';
 
 const App = () => {
-  // TODO: Define initial product data
+  // Define a list of product objects in state to allow removal
+  const [products, setProducts] = useState([
+    { id: 1, name: 'Laptop', price: '$999', inStock: true },
+    { id: 2, name: 'Phone', price: '$699', inStock: false },
+    { id: 3, name: 'Tablet', price: '$499', inStock: true }
+  ]);
 
-  // TODO: Implement state to manage filtering
-
-  // TODO: Implement logic to filter products based on availability
+  const handleRemove = (id) => {
+    setProducts(products.filter(product => product.id !== id));
+  };
 
   return (
-    <div>
-      <h1>{/* TODO: Add 'Product Dashboard' title here */}</h1>
-      
-      {/* TODO: Add buttons to allow filtering by availability */}
-
-      {/* TODO: Render the ProductList component and pass filtered products */}
-      
-    </div>
+    <Container maxWidth="md">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h3" component="h1" gutterBottom align="center" color="primary">
+          Product Dashboard
+        </Typography>
+        <ProductList products={products} onRemove={handleRemove} />
+      </Box>
+    </Container>
   );
 };
 
